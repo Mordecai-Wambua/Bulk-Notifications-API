@@ -1,0 +1,68 @@
+### POST request (Good Payload)
+POST http://localhost:8000/api/notifications/bulk/
+Content-Type: application/json
+
+{
+    "name": "Alice Kamau",
+    "email": "alice@example.com",
+    "lost": "lost",
+    "notifications": [
+        {
+            "title": "Welcome",
+            "message": "Thank you for joining us.",
+            "channel": "email"
+        },
+        {
+            "title": "Reminder",
+            "message": "Your subscription renews tomorrow.",
+            "channel": "sms"
+        }
+    ]
+}
+
+
+### POST request (Missing Notification Field)
+POST http://localhost:8000/api/notifications/bulk/
+Content-Type: application/json
+
+{
+    "name": "Alice Kamau",
+    "email": "alice@example.com",
+    "notifications": []
+}
+
+### POST request (Missing Sender Field)
+POST http://localhost:8000/api/notifications/bulk/
+Content-Type: application/json
+
+{
+    "notifications": [
+        {
+            "title": "Welcome",
+            "message": "Thank you for joining us.",
+            "channel": "email"
+        },
+        {
+            "title": "Reminder",
+            "message": "Your subscription renews tomorrow.",
+            "channel": "sms"
+        }
+    ]
+}
+
+
+### POST request (Error in notification payload = wrong channel)
+POST http://localhost:8000/api/notifications/bulk/
+Content-Type: application/json
+
+{
+    "name": "Alice Kamau",
+    "email": "alice@example.com",
+    "notifications": [
+        {
+            "title": "Welcome",
+            "message": "Thank you for joining us.",
+            "channel": "channel"
+        }
+    ]
+}
